@@ -1,6 +1,7 @@
 package calc
 
 import (
+	"errors"
 	"log"
 	"strconv"
 
@@ -45,29 +46,36 @@ func handleOp(op string) gin.HandlerFunc {
 		}
 
 		if op == "divide" && secondOperand == 0 {
-			setError(c, "Cannot Divide by 0")
+			setError(c, "Cannot divide by 0")
+			return
+		}
+
+		result, err := getResult(firstOperand, secondOperand, op)
+
+		if err != nil {
+			setError(c, err.Error())
 			return
 		}
 
 		c.JSON(200, gin.H{
-			"result": getResult(firstOperand, secondOperand, op),
+			"result": result,
 		})
 	}
 }
 
-func getResult(first, second float64, op string) float64 {
+func getResult(first, second float64, op string) (float64, error) {
 	switch op {
 	case sum:
-		return first + second
+		return first + second, nil
 	case subtract:
-		return first - second
+		return first - second, nil
 	case multiply:
-		return first * second
+		return first * second, nil
 	case divide:
-		return first / second
+		return first / second, nil
 	default:
 		log.Println("Unsupported operator", op)
-		return 0
+		return 0, errors.New("Unsupported operator")
 	}
 }
 
