@@ -25,14 +25,12 @@ A calculator API written in Golang
 
 ### Prerequisites
    * [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-   * [dep](https://golang.github.io/dep/docs/installation.html)
    * [Golang](https://golang.org/doc/install)
 
 ### Steps
 
 1. `git clone git@github.com:alohr51/Go-Calculator-API.git`
 1. `cd Go-Calculator-API`
-1. `dep ensure`
 1. `go run main.go`
 
 ### Test
